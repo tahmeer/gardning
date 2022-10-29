@@ -24,15 +24,15 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Passport::tokensCan([
-            'place-orders' => 'Place orders',
-            'check-status' => 'Check order status',
-        ]);
+        // Passport::tokensCan([
+        //     'place-orders' => 'Place orders',
+        //     'check-status' => 'Check order status',
+        // ]);
          
-        Passport::setDefaultScope([
-            'check-status',
-            'place-orders',
-        ]);
+        // Passport::setDefaultScope([
+        //     'check-status',
+        //     'place-orders',
+        // ]);
         
     }
 }

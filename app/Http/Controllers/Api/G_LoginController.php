@@ -70,8 +70,8 @@ class G_LoginController extends Controller
                     }
                     Auth::login($gardners);
                     $gardner = Auth::user();
-                    // $token = $gardner->createToken('API Token')->accessToken;
-                    $token = $gardner->createToken('API Token',['place-orders'])->accessToken;
+                    $token = $gardner->createToken('API Token')->accessToken;
+                    // $token = $gardner->createToken('API Token',['place-orders'])->accessToken;
 
                     $data = [
                         'user' => $gardner,

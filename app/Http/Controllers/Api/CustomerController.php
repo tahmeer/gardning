@@ -76,7 +76,7 @@ class CustomerController extends Controller
             }else{
                 $createBooking = new Booking;
                 $createBooking->booking_title = $request->booking_title;
-                $createBooking->service = $request->service;
+                $createBooking->service = implode(',', $request->service);
                 $createBooking->location = $request->location;
                 $createBooking->date = $request->date;
                 $createBooking->time = $request->time;
