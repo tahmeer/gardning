@@ -23,12 +23,12 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('google/redirect', [App\Http\Controllers\Api\LoginController::class, 'googleRedirect'])->name('user.google.redirect');
     Route::get('googleAuthenticate', [App\Http\Controllers\Api\LoginController::class, 'handleGoogleCallback'])->name('user.login.google');
 
-    
+
     Route::get('search', [App\Http\Controllers\Api\SearchController::class, 'index']);
     Route::post('search/result', [App\Http\Controllers\Api\SearchController::class, 'searchResult']);
     Route::match(array('GET', 'POST'), 'properties/{slug}', [App\Http\Controllers\Api\PropertyController::class, 'single'])->name('property.single');
 });
-Route::group(['prefix' => 'v1', 'middleware' => ['auth:api','scope:check-status,place-orders']], function () {
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
     Route::get('accessUser', [App\Http\Controllers\Api\LoginController::class, 'index']);
     Route::get('profile/{id}', [App\Http\Controllers\Api\CustomerController::class, 'profileView']);
     Route::POST('updateProfile', [App\Http\Controllers\Api\CustomerController::class, 'updateProfile']);
@@ -38,27 +38,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['auth:api','scope:check-status,
     Route::post('AwardTo', [App\Http\Controllers\Api\CustomerController::class, 'AwardTo']);
     Route::GET('logout', [App\Http\Controllers\Api\LoginController::class, 'logout']);
 
-
 });
-    Route::group(['prefix' => 'v1', 'middleware' => ['auth:gardner','scope:place-orders']], function () {
-    Route::get('accessGardner', [App\Http\Controllers\Api\GardnerController::class, 'index']);
-    Route::GET('GardnerBooking', [App\Http\Controllers\Api\GardnerController::class, 'MyBooking']);
-    Route::GET('logout/gardner', [App\Http\Controllers\Api\GardnerController::class, 'logout']);
+// Gardner route
+    Route::group(['prefix' => 'v1', 'middleware' => ['auth:gardner']], function () {
+        Route::get('accessGardner', [App\Http\Controllers\Api\GardnerController::class, 'index']);
+        Route::GET('GardnerBooking', [App\Http\Controllers\Api\GardnerController::class, 'MyBooking']);
+        Route::GET('logout/gardner', [App\Http\Controllers\Api\GardnerController::class, 'logout']);
 
-});
+    });
 
-Route::get('/redirect', function () {
-    $query = http_build_query([
-        'client_id' => 'client-id',
-        'redirect_uri' => 'https://www.youtube.com/watch?v=yB2Hs5lHYek&list=RDy_hq5-kQmuw&index=13',
-        'response_type' => 'code',
-        'scope' => 'place-orders check-status',
-    ]);
- 
-    return redirect('https://www.youtube.com/watch?'.$query);
-});
-//     Route::group(['prefix' => 'v1', 'middleware' => ['auth:customer']], function () {
-//         Route::get('accessUser', [App\Http\Controllers\Api\LoginController::class, 'index']);
 
-    
-// });

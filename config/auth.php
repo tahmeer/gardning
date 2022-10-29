@@ -76,7 +76,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Gardner::class,
         ],
-        
+
 
         // 'users' => [
         //     'driver' => 'database',

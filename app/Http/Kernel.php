@@ -15,8 +15,8 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
-        \App\Http\Middleware\CustomerProvider::class,
-        \App\Http\Middleware\GardnerProvider::class,
+        // \App\Http\Middleware\CustomerProvider::class,
+        // \App\Http\Middleware\GardnerProvider::class,
         \App\Http\Middleware\TrustProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
@@ -67,9 +67,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'json.response' => \App\Http\Middleware\ForceJsonResponse::class,
-        'auth.gardner' => \App\Http\Middleware\GardnerProvider::class,
-        'auth.customer' => \App\Http\Middleware\CustomerProvider::class,
-        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
-        'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+        // 'auth.gardner' => \App\Http\Middleware\GardnerProvider::class,
+        // 'auth.customer' => \App\Http\Middleware\CustomerProvider::class,
+        // 'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        // 'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
     ];
 }
