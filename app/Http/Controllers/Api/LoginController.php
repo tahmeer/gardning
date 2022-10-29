@@ -26,14 +26,25 @@ class LoginController extends Controller
             if ($validation->fails()) {
                 return response()->json(['message' => 'failure', 'error' => $validation->errors()], 422);
             }else{
+                $randomNumber = random_int(1000, 9999);
                 $insertUser = new User;
                 $insertUser->name = $request->name;
                 $insertUser->email = $request->email;
                 $insertUser->phone = $request->phone;
                 $insertUser->password = bcrypt($request->password);
                 $insertUser->title = 'Customer';
+                $insertUser->otp = $randomNumber;
                 $insertUser->save();
-
+                //dd($insertUser->otp);
+                // $data = [
+                //     'otp' => $insertUser->otp
+                    
+                // ];
+                // \Mail::send('mail.registration', $data , function($message){
+                // $message->to($insertUser->email, 'itsFromMe')
+                //         ->subject('thisIsMySucject');
+                // });
+                //\Mail::to($insertUser->email)->send(new \App\Mail\RegisterMail($details));
                 $user = User::where('email', $insertUser->email)->first();
                 $token = $user->createToken('API Token')->accessToken;
             

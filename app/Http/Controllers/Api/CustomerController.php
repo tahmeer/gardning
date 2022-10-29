@@ -140,5 +140,19 @@ class CustomerController extends Controller
             return response(['message' => 'failure', 'error' => $th->getMessage()], 500);
         }
     }
+    public function VerifyOtp_Customer(Request $request){
+        try{
+            $verify_customer = User::where('id',$request->id)->where('otp',$request->otp)->get();
+            if(count($verify_customer) > 0){
+                return response(['message' => 'Success', 'data' => $verify_customer], 200);
+            }
+            return response(['message' => 'failure', 'error' => 'Customer Not Found'], 422);
+        }catch (\Throwable $th) {
+            return response(['message' => 'failure', 'error' => $th->getMessage()], 500);
+        }
+        
+
+
+    }
     
 }

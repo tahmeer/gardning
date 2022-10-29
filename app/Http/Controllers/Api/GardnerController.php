@@ -119,5 +119,19 @@ class GardnerController extends Controller
         
 
     }
+    public function VerifyOtp_Gardner(Request $request){
+        try{
+            $verify_gardner = Gardner::where('id',$request->id)->where('otp',$request->otp)->get();
+            if(count($verify_gardner) > 0){
+                return response(['message' => 'Success', 'data' => $verify_gardner], 200);
+            }
+            return response(['message' => 'failure', 'error' => 'Gardner Not Found'], 422);
+        }catch (\Throwable $th) {
+            return response(['message' => 'failure', 'error' => $th->getMessage()], 500);
+        }
+        
+
+
+    }
 
 }

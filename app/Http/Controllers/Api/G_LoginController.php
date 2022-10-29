@@ -26,6 +26,8 @@ class G_LoginController extends Controller
             if ($validation->fails()) {
                 return response()->json(['message' => 'failure', 'error' => $validation->errors()], 422);
             }else{
+                $randomNumber = random_int(1000, 9999);
+
             $insertGardner = new Gardner;
             $insertGardner->name = $request->name;
             $insertGardner->email = $request->email;
@@ -33,7 +35,7 @@ class G_LoginController extends Controller
             $insertGardner->password = bcrypt($request->password);
             $insertGardner->title = 'Gardner';
             $insertGardner->skills = implode(',', $request->skills);
-
+            $insertGardner->otp = $randomNumber;
             $insertGardner->save();
 
             $gardner = Gardner::where('email', $insertGardner->email)->first();
